@@ -24,5 +24,7 @@ pipeline {
         stage('Docker Image') {
             steps{
                 bat 'docker build -t onixweb .'
+            }
+        }
     }
 }
