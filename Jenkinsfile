@@ -15,8 +15,11 @@ pipeline {
         }
         stage('Sonar scan') {
             steps{
-                bat 'cd C:\\Users\\pavan\\OneDrive\\Desktop\\sonarqube-10.4.1.88267\\bin\\windows-x86-64'
-                bat '''sonar-scanner.bat -D"sonar.projectKey=Jenkins-Sonarqube-Docker" -D"sonar.sources=." -D"sonar.host.url=http://localhost:9000" -D"sonar.token=sqp_3a7c14cc0030612ec004f1f554f6fa17fd9298a3"'''
+               bat ''''mvn clean verify sonar:sonar \
+  -Dsonar.projectKey=Jenkins-Sonarqube-Docker \
+  -Dsonar.projectName='Jenkins-Sonarqube-Docker' \
+  -Dsonar.host.url=http://localhost:9000 \
+  -Dsonar.token=sqp_3a7c14cc0030612ec004f1f554f6fa17fd9298a3'''
                  }
         }
     }
