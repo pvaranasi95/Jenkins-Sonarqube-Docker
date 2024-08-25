@@ -15,6 +15,7 @@ pipeline {
         }
         stage('Sonar scan') {
             steps{
+                bat 'cd C:\\Users\\pavan\\OneDrive\\Desktop\\sonarqube-10.4.1.88267\\sonar-scanner-6.1.0.4477-windows-x64\\bin'
                bat '''sonar-scanner \
   -Dsonar.projectKey=Jenkins-Sonarqube-Docker \
   -Dsonar.sources=. \
