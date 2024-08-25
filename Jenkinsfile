@@ -28,7 +28,7 @@ pipeline {
         }
         stage('Docker Push') {
             steps{
-                bat 'docker push pvaranasi/onixweb:1'
+                bat 'docker push pvaranasi/onixweb'
             }
         }
         stage('Container') {
