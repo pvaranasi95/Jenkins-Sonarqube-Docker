@@ -33,7 +33,7 @@ pipeline {
         }
         stage('Container') {
             steps{
-                bat 'docker run -d -p 8088:80 -name onixweb pvaranasi/onixweb:1'
+                bat 'docker run -d -p 8088:80 -name onixweb pvaranasi/onixweb'
             }
         }
     }
