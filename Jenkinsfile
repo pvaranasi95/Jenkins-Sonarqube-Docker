@@ -26,5 +26,15 @@ pipeline {
                 bat 'docker build -t onixweb .'
             }
         }
+        stage('Docker Push') {
+            steps{
+                bat 'docker push pvaranasi/onixweb:1'
+            }
+        }
+        stage('Container') {
+            steps{
+                bat 'docker run -d -p 8088:80 -name onixweb pvaranasi/onixweb:1'
+            }
+        }
     }
 }
