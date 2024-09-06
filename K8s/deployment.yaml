@@ -14,7 +14,7 @@ spec:
      specs:
        containers:
        - name: onixweb
-         image: pvaranasi/onixweb
+         image: pvaranasi/onixweb:latest
          ports: 
          - containerPort: 8088
     
