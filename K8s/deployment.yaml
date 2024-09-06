@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+   name: onixweb
+spec:
+   selector:
+     matchLabels:
+       app: onixweb
+   replicas: 2
+   template:
+     metadata:
+      lables:
+        app: onixweb
+     specs:
+       containers:
+       - name: onixweb
+         image: pvaranasi/onixweb
+         ports: 
+         - containerPort: 8088
+    
