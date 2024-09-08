@@ -42,13 +42,13 @@ pipeline {
             emailext subject: "Build Failed for:%JOB_NAME% with %BUILD_NUMBER%",
                 body: "Hi Your jenkins Build is failed for %JOB_NAME% with %BUILD_NUMBER%",
                 to: "pavanvaranasi95@gmail.com",
-                from: "pavanvaranasi95@gmail.com
+                from: "pavanvaranasi95@gmail.com"
         }
         success{
             emailext subject: "Build success for %JOB_NAME% with %BUILD_NUMBER%",
                 body: "Hi Your jenkins Build is success for %JOB_NAME% with %BUILD_NUMBER%",
                 to: "pavanvaranasi95@gmail.com",
-                from: "pavanvaranasi95@gmail.com
+                from: "pavanvaranasi95@gmail.com"
         }
     }
 }
