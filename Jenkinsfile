@@ -23,17 +23,17 @@ pipeline {
         }
         stage('Docker Image') {
             steps{
-                bat 'docker build -t pvaranasi/onixweb .'
+                bat 'docker build -t pvaranasi/onixweb:${BUILD_NUMBER} .'
             }
         }
         stage('Docker Push') {
             steps{
-                bat 'docker push pvaranasi/onixweb'
+                bat 'docker push pvaranasi/onixweb:${BUILD_NUMBER}'
             }
         }
         stage('Container') {
             steps{
-                bat 'docker run -d -p 8088:80 --name onixweb pvaranasi/onixweb'
+                bat 'docker run -d -p 8088:80 --name onixweb pvaranasi/onixweb:${BUILD_NUMBER}'
             }
         }
     }
