@@ -23,7 +23,7 @@ pipeline {
         // }
         stage('Docker Image') {
             steps{
-                bat 'docker build -t %BUILD_NUMBER% .'
+                bat 'docker build -t pvaranasi/onixweb:%BUILD_NUMBER% .'
             }
         }
         stage('Docker Push') {
