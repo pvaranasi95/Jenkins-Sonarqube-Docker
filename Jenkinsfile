@@ -22,21 +22,18 @@ pipeline {
         //     }
         // }
         stage('Docker Image') {
-            environment {
-        DOCKER_IMAGE = "pvaranasi/ultimate-cicd:${BUILD_NUMBER}"
-            }
             steps{
-                bat 'docker build -t ${DOCKER_IMAGE} .'
+                bat 'docker build -t %BUILD_NUMBER% .'
             }
         }
         stage('Docker Push') {
             steps{
-                bat 'docker push pvaranasi/onixweb:${BUILD_NUMBER}'
+                bat 'docker push pvaranasi/onixweb:%BUILD_NUMBER%'
             }
         }
         stage('Container') {
             steps{
-                bat 'docker run -d -p 8088:80 --name onixweb pvaranasi/onixweb:${BUILD_NUMBER}'
+                bat 'docker run -d -p 8088:80 --name onixweb pvaranasi/onixweb:%BUILD_NUMBER%'
             }
         }
     }
