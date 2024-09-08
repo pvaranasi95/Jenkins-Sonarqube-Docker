@@ -21,22 +21,22 @@ pipeline {
         //          }
         //     }
         // }
-        stage('Docker Image') {
-            steps{
-                bat 'docker build -t pvaranasi/onixweb:%BUILD_NUMBER% .'
-            }
-        }
-        stage('Docker Push') {
-            steps{
-                bat 'docker push pvaranasi/onixweb:%BUILD_NUMBER%'
-            }
-        }
-        stage('Container') {
-            steps{
-                bat 'docker run -d -p 8088:80 --name onixweb-%BUILD_NUMBER% pvaranasi/onixweb:%BUILD_NUMBER%'
-            }
-        }
-    }
+    //     stage('Docker Image') {
+    //         steps{
+    //             bat 'docker build -t pvaranasi/onixweb:%BUILD_NUMBER% .'
+    //         }
+    //     }
+    //     stage('Docker Push') {
+    //         steps{
+    //             bat 'docker push pvaranasi/onixweb:%BUILD_NUMBER%'
+    //         }
+    //     }
+    //     stage('Container') {
+    //         steps{
+    //             bat 'docker run -d -p 8088:80 --name onixweb-%BUILD_NUMBER% pvaranasi/onixweb:%BUILD_NUMBER%'
+    //         }
+    //     }
+    // }
     post{
         failure{
             emailext subject: "Build Failed for:%JOB_NAME% with %BUILD_NUMBER%",
