@@ -1,7 +1,5 @@
 pipeline {
-    agent {
-        node{label 'Windows1'}
-    }
+    agent any
     tools {
         jdk 'JDK11'  //JDK17
         maven 'Maven'
@@ -38,17 +36,29 @@ pipeline {
     //     }
     // }
     post{
-        failure{
-            emailext subject: "Build Failed for:%JOB_NAME% with %BUILD_NUMBER%",
-                body: "Hi Your jenkins Build is failed for %JOB_NAME% with %BUILD_NUMBER%",
-                to: "pavanvaranasi95@gmail.com",
-                from: "pavanvaranasi95@gmail.com"
-        }
-        success{
-            emailext subject: "Build success for %JOB_NAME% with %BUILD_NUMBER%",
-                body: "Hi Your jenkins Build is success for %JOB_NAME% with %BUILD_NUMBER%",
-                to: "pavanvaranasi95@gmail.com",
-                from: "pavanvaranasi95@gmail.com"
+        always{
+            script {
+                    def jenkinsBuildData = [
+                job_name: env.JOB_NAME,
+                build_number: env.BUILD_NUMBER.toInteger(),
+                status: currentBuild.currentResult,
+                timestamp: new Date().format("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", TimeZone.getTimeZone('UTC')),
+                duration: currentBuild.duration,
+                url: env.BUILD_URL
+            ]
+
+            def jsonBody = groovy.json.JsonOutput.toJson(jenkinsBuildData)
+            def jsonBodyEscaped = jsonBody.replace('"', '\\"')
+
+            echo "Sending build data to Elasticsearch: ${jsonBody}"
+
+            bat """
+            curl.exe -X POST "http://localhost:9200/jenkins/_doc" ^
+                 -H "Content-Type: application/json" ^
+                 -d "${jsonBodyEscaped}"
+            """
+                }
+
         }
     }
 }
