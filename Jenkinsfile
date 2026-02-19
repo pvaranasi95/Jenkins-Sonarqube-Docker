@@ -30,7 +30,7 @@ pipeline {
     //             bat 'docker run -d -p 8088:80 --name onixweb-%BUILD_NUMBER% pvaranasi/onixweb:%BUILD_NUMBER%'
     //         }
     //     }
-    // }
+    }
     post{
         always{
             script {
